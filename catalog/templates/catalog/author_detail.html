@@ -1,0 +1,16 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+	<h2>  {{ author.first_name }} {{ author.last_name }} : {{ author.date_of_birth }} - {{ author.date_of_death}} </h2>
+	<p> <a href="{% url 'author-update' author.id %}"> update author </a> ||
+	<span class="text-danger"> <a href="{% url 'author-delete' author.id %}"> author delete </a> </span> </p>
+	<h3> Songs: </h3> 
+
+	{% for song in author.book_set.all %}   
+	<!-- books related to that specific author (Book has a foreignKey Author) thus related model -->
+		<p> The song title is : {{ song.title }} </p>
+		<p> The song is about: {{ song.summary }} </p>
+		<p> The genres are: {% for genre in song.genre.all %} {{ genre }} {% if not forloop.last %}, {% endif %} {% endfor %} </p>
+	{% endfor %}
+		 <!-- a ManyToMany Field -->
+
+{% endblock %}

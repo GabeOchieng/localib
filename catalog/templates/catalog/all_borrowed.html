@@ -1,0 +1,27 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+<h1> all Borrowed books </h1>
+	{% if borrowed %}
+	<form action="" method="post">
+		{% for borrow_inst in borrowed %}
+		
+		{% csrf_token %}
+		<p> name:{{ borrow_inst.borrower }} || {{ borrow_inst.book.author }} || {{ borrow_inst.book }}  </p>
+		<!--
+
+
+			<label for="returned"> <input type="radio" name="book_status" value="return-{{ borrow_inst.id }}"
+
+			" id="first_box"> Return </label>
+			<label for="renewed"> <input type="radio" name="book_status" value="renew-{{ borrow_inst.id}}" id="second_box"> Renew</label> </p>
+			<input type="submit" value="Update status" />
+		-->
+
+		
+		{% endfor %}
+
+	</form>
+	
+	{% endif %}
+
+{% endblock %}

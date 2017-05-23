@@ -1,0 +1,26 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+	<h1> Title: {{ book.title }}</h1>    <!-- book is the model name -->
+	<p><strong>Author:</strong><a href="{% url 'author-detail' book.author.pk %}"> {{ book.author }}</a></p>
+	<p><strong>Summary:</strong> {{ book.summary }} </p>
+	<p><strong>ISBN:</strong>{{ book.isbn }}</p>
+	<p><strong>Language:</strong>{{ book.language }}</p>
+	<p><strong>Genre: </strong>{% for genre in book.genre.all %} {{ genre }} {% if not forloop.last %}, {% endif %} {% endfor %} </p>  
+	<!-- ManyToMany relationship in genre -->
+	<!-- To use get_absolute_url link outside model_list (move from one model_detail to another_model_detail) : url 'model-detail' current_model.property.pk (The property is a ForeignKey) -->
+
+	<div style="margin-left:20px; margin-top:20px;">
+		<h4>Copies</h4>
+		{% for copy in book.bookinstance_set.all %}
+		<!-- _set access second models property for the first model (bookinstance has a foreignKey to book). To access the first models property from the second bookinstance.book.title -->
+		<hr>
+		<p class=" {% if copy.status == 'a' %} text-success {% elif copy.status == 'd' %} text-danger {% else %} text-warning {% endif %} ">{{ copy.get_status_display}}</p>  
+		 <!-- status is a feature with options thus get_feature_display -->
+		{% if copy.status != 'a' %}<p><strong>Due to be returned:</strong> {{ copy.due_back }}</p> {% endif %}
+		<p><strong>Imprint: </strong> {{ copy.imprint }} </p>
+		<p class="text-muted"><strong>Id: </strong> {{ copy.id }}</p>
+		<p> <strong> Borrowed by: {{copy.borrower}} </strong> </p>
+		{% endfor %} </p>
+	</div>
+
+{% endblock %}

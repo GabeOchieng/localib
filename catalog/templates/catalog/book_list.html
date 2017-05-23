@@ -1,0 +1,16 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+	<h1> Book List </h1>
+	{% if book_list %}
+	<ul>
+		{% for book in book_list %}
+		<!-- model.get_absolute_url uses reverse to link a list item in the html to a detail_view in the model -->
+		<li>
+			<a href="{{ book.get_absolute_url }}">{{ book.title }} </a> {{ book.author }} 
+		</li>
+		{% endfor %}
+	</ul>
+	{% else %}
+		<p> There are no books in the Library </p>
+	{% endif %}
+{% endblock %}
