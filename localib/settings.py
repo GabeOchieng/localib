@@ -108,3 +108,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'))
 
 # Simplified static file serving
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
