@@ -74,7 +74,8 @@ WSGI_APPLICATION = 'localib.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+# https://docs.djangoproject.com/en/1.8/r
+ef/settings/#databases
 
 DATABASES = {
     'default': {
@@ -106,3 +107,4 @@ LOGIN_REDIRECT_URL = '/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # Simplified static file serving
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'

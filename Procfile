@@ -1,1 +1,1 @@
-web: gunicorn localib.wgi --log-file -
+web: gunicorn localib.wsgi --log-file -
